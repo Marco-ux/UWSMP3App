@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>      
+  <session-factory>
+    <!-- Database connection settings -->
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+    <!-- /bookstore is the name the database -->
+    <property name="connection.url">jdbc:mysql://localhost:3306/mp3store</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">banana</property>
+    <property name="show_sql">true</property>
+    
+    <!--//test changed that to "create", if no schema is existing right now
+	-->
+	<property name="hbm2ddl.auto">update</property>
+	
+        
+    <mapping class="marco.uws.projects.UWSMP3App.model.Mp3" />
+     
+  </session-factory>
+</hibernate-configuration>
