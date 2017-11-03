@@ -19,6 +19,8 @@
 	
         
     <mapping class="marco.uws.projects.UWSMP3App.model.Mp3" />
+    <mapping class="marco.uws.projects.UWSMP3App.model.PlayList" />
+       <mapping class="marco.uws.projects.UWSMP3App.model.User" />
      
   </session-factory>
 </hibernate-configuration>
