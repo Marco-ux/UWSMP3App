@@ -60,28 +60,33 @@ public class MP3Endpoint {
 		mp3controller.delete(id);
 	}
 	
+	/**
+	 * This main method put a fist mp3 object into your MYSQL Database
+	 * Run this main method as Righ click on it in the Project Explorer >Run As
+	 * >Run as Java Application
+	 */
 	public static void main(String[] args) {
     	
 		Mp3 mp3 = new Mp3();
     	mp3.setTitle("hallo");
-    	mp3.setId(0);
+    	//mp3.setId(0);
     	
-    	PlayList play = new PlayList();
-    	play.setTitle("frech");
+    	//PlayList play = new PlayList();
+    	//play.setTitle("frech");
     	
     	//MP3Controller.saveObject(play);
     	
     	
     	
-    	play= (PlayList) MP3Controller.getObject(new PlayList(), 0);
-    	mp3.getPlayListsInvolved().remove(play);
+    	//play= (PlayList) MP3Controller.getObject(new PlayList(), 0);
+    	//mp3.getPlayListsInvolved().remove(play);
     	//play.setTitle("Faaaaaancy");
 		
     	MP3Controller.saveObject(mp3);
     	
-    	play= (PlayList) MP3Controller.getObject(new PlayList(), 0);
+    	//play= (PlayList) MP3Controller.getObject(new PlayList(), 0);
     	
-    	MP3Controller.deleteObject(play);
+    	//MP3Controller.deleteObject(play);
         
         
     }
