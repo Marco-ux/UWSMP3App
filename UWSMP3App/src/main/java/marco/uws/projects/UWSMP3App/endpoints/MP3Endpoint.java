@@ -1,5 +1,8 @@
 package marco.uws.projects.UWSMP3App.endpoints;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -32,6 +35,22 @@ public class MP3Endpoint {
 		return "1234blabla";
 	}
 	
+	@Path("/{id}/individualRank")
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getIndividualRank (@PathParam("id") long id){
+		int rank = mp3controller.getIndividualRank(id);
+		return Integer.toString(rank);
+	}
+	
+	@Path("/charts")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public TreeSet<Mp3> getCharts (){
+		TreeSet<Mp3> tracks = mp3controller.getCharts();
+		return tracks;
+	}
+	
 	@Path("/")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -47,6 +66,7 @@ public class MP3Endpoint {
 		Mp3 b= mp3controller.read(id);
 		return b ;
 	}
+	
 	
 	@Path("/")
 	@PUT
@@ -103,9 +123,10 @@ public class MP3Endpoint {
     	
     	Vote vote1 = new Vote();
     	vote1.setVoter(udo);
+    	vote1.setRating(4);
       	MP3Controller.saveObject(vote1);
     	
-    	mp3 = (Mp3) MP3Controller.getObject(new Mp3(), 2);
+    	mp3 = (Mp3) MP3Controller.getObject(new Mp3(), 1);
     	udo = (User) MP3Controller.getObject(new User(), 0);
     	vote1 = (Vote) MP3Controller.getObject(new Vote(), 0);
     	

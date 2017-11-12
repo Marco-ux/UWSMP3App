@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlTransient;
 	@XmlRootElement
 	@Entity
 	@Table(name = "mp3")
-	public class Mp3 {
+	public class Mp3 implements Comparable<Mp3> {
 		
 			@Id
 			@GeneratedValue( strategy = GenerationType.AUTO)
@@ -83,6 +83,17 @@ import javax.xml.bind.annotation.XmlTransient;
 
 			public void setPlayListsInvolved(Set<PlayList> playListsInvolved) {
 				this.playListsInvolved = playListsInvolved;
+			}
+
+			@Override
+			public int compareTo(Mp3 o) {
+				if(this.playListsInvolved.size()> o.getPlayListsInvolved().size()){
+					return -1;
+				}
+				else if (this.playListsInvolved.size()< o.getPlayListsInvolved().size()){
+				return 1;
+				}
+				return 0;
 			}
 
 			

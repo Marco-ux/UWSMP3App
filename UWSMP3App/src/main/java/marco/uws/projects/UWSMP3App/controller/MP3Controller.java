@@ -1,6 +1,8 @@
 package marco.uws.projects.UWSMP3App.controller;
 
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -64,5 +66,17 @@ public class MP3Controller {
 		session.close();
 	}
 	
+	/**
+	 * Retrieves a List with all Object of a class that are currently present in the database.
+	 * @param o Any Object from the same class as the desired List.
+	 * @return A List of Objects from the same class as o.
+	 */
+	public static List<Object> getAllInstances(Object o){
+		SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionfactory.openSession();
+		List<Object> allInstances = session.createCriteria(o.getClass()).list();
+		session.close();
+		return allInstances;
+	}
     
 }
