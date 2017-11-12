@@ -1,28 +1,30 @@
 package marco.uws.projects.UWSMP3App.controller;
 
 import marco.uws.projects.UWSMP3App.model.Mp3;
+import marco.uws.projects.UWSMP3App.model.Vote;
 
-public class MP3SessionController {
+public class VoteSessionController {
 	
-	Mp3 classObjectMp3 = new Mp3();
+Vote classObjectVote = new Vote();
 
 	
-	public void createMP3(Mp3 o) {
+	public void create(Vote o) {
     MP3Controller.saveObject(o);
     }
 	
-	public Mp3 read(long id) {	
-	return (Mp3) MP3Controller.getObject(classObjectMp3, id);
+	public Vote read(long id) {	
+	return (Vote) MP3Controller.getObject(classObjectVote, id);
         
     }
 	
-	public Mp3 update(Mp3 o) {
+	public Vote update(Mp3 o) {
 	MP3Controller.saveObject(o);
 	return read(o.getId());
     }
     
     public void delete(long id) {
-    Mp3	o = read(id);
+    Vote	o = read(id);
     MP3Controller.deleteObject(o);
     }
+
 }

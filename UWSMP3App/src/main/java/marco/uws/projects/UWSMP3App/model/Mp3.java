@@ -6,10 +6,13 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 	@XmlRootElement
 	@Entity
@@ -17,6 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 	public class Mp3 {
 		
 			@Id
+			@GeneratedValue( strategy = GenerationType.AUTO)
 			@Column(nullable = false)
 		 	private long id;
 		    private String title;
@@ -24,8 +28,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 		    private String genre;
 		    private String albumTitle;
 		    
-		    @ManyToMany (fetch = FetchType.EAGER)
+		    //tracks have to be added to play List
+		    @ManyToMany (mappedBy = "tracks",fetch = FetchType.EAGER)
 		    private Set <PlayList> playListsInvolved= new HashSet<PlayList>();
+		    
 		    
 			public Mp3() {
 				
@@ -70,7 +76,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 			public void setAlbumTitle(String albumTitle) {
 				this.albumTitle = albumTitle;
 			}
-
+			@XmlTransient
 			public Set<PlayList> getPlayListsInvolved() {
 				return playListsInvolved;
 			}
@@ -79,7 +85,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 				this.playListsInvolved = playListsInvolved;
 			}
 
-		
 			
 			
 			

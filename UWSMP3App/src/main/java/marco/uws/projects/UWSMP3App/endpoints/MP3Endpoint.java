@@ -12,8 +12,12 @@ import javax.ws.rs.core.MediaType;
 
 import marco.uws.projects.UWSMP3App.controller.MP3Controller;
 import marco.uws.projects.UWSMP3App.controller.MP3SessionController;
+import marco.uws.projects.UWSMP3App.model.Medicine;
 import marco.uws.projects.UWSMP3App.model.Mp3;
+import marco.uws.projects.UWSMP3App.model.PatientCase;
 import marco.uws.projects.UWSMP3App.model.PlayList;
+import marco.uws.projects.UWSMP3App.model.User;
+import marco.uws.projects.UWSMP3App.model.Vote;
 
 
 @Path("/mp3")
@@ -66,28 +70,55 @@ public class MP3Endpoint {
 	 * >Run as Java Application
 	 */
 	public static void main(String[] args) {
-    	
+		
+		/*
+		PatientCase p = new PatientCase();
+		p.setCaseDescription("neuer Fall");
+		MP3Controller.saveObject(p);
+		
+		Medicine m = new Medicine();
+		m.setPatientCase(p);
+		m.setName("Medizin 1");
+		MP3Controller.saveObject(m);
+		*/
+		
+		
+		Mp3 mp32 = new Mp3();
+    	mp32.setTitle("grausagf");
+    	MP3Controller.saveObject(mp32);
+		
 		Mp3 mp3 = new Mp3();
     	mp3.setTitle("hallo");
     	//mp3.setId(0);
-    	
-    	//PlayList play = new PlayList();
-    	//play.setTitle("frech");
-    	
-    	//MP3Controller.saveObject(play);
-    	
-    	
-    	
-    	//play= (PlayList) MP3Controller.getObject(new PlayList(), 0);
-    	//mp3.getPlayListsInvolved().remove(play);
-    	//play.setTitle("Faaaaaancy");
-		
     	MP3Controller.saveObject(mp3);
     	
-    	//play= (PlayList) MP3Controller.getObject(new PlayList(), 0);
+    	User udo = new User();
+    	udo.setFistName("Udo");
+    	MP3Controller.saveObject(udo);
     	
-    	//MP3Controller.deleteObject(play);
-        
+    	PlayList play = new PlayList();
+    	play.setTitle("frech");
+    	play.setCreator(udo);
+    	MP3Controller.saveObject(play);
+    	
+    	Vote vote1 = new Vote();
+    	vote1.setVoter(udo);
+      	MP3Controller.saveObject(vote1);
+    	
+    	mp3 = (Mp3) MP3Controller.getObject(new Mp3(), 2);
+    	udo = (User) MP3Controller.getObject(new User(), 0);
+    	vote1 = (Vote) MP3Controller.getObject(new Vote(), 0);
+    	
+    	play= (PlayList) MP3Controller.getObject(new PlayList(), 0);
+    	
+    	play.getTracks().add(mp3);
+    	
+    	play.getPlayListFollowers().add(udo);
+    	
+    	play.getVotes().add(vote1);
+    	
+    	MP3Controller.saveObject(play);
+    	
         
     }
 	

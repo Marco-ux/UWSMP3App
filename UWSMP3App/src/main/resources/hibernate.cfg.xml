@@ -17,10 +17,18 @@
 	-->
 	<property name="hbm2ddl.auto">update</property>
 	
+		<!-- Disable the second-level cache -->
+	<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+	<property name="cache.use_query_cache">false</property>
+	<property name="cache.use_mimimal_puts">false</property>
+	<property name="max_fetch_depth">3</property>
         
     <mapping class="marco.uws.projects.UWSMP3App.model.Mp3" />
     <mapping class="marco.uws.projects.UWSMP3App.model.PlayList" />
-       <mapping class="marco.uws.projects.UWSMP3App.model.User" />
+    <mapping class="marco.uws.projects.UWSMP3App.model.User" />
+    <mapping class="marco.uws.projects.UWSMP3App.model.Vote" />
+    <mapping class="marco.uws.projects.UWSMP3App.model.Medicine" />
+    <mapping class="marco.uws.projects.UWSMP3App.model.PatientCase" />
      
   </session-factory>
 </hibernate-configuration>
