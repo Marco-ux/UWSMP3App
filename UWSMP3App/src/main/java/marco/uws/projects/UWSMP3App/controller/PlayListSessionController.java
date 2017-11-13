@@ -14,6 +14,7 @@ public class PlayListSessionController {
 	PlayList PlayListObject = new PlayList();
 	
 	UserSessionController userSessionController = new UserSessionController();
+	MP3SessionController mp3sessioncntroller = new MP3SessionController();
 	
 	public void create(long userId, PlayList o) {
 		User creator = userSessionController.read(userId);
@@ -56,6 +57,21 @@ public class PlayListSessionController {
 			count+=v.getRating();
 			}
 			return count/size;
+		}
+
+		public PlayList addMp3(long playListid, long mp3id) {
+			PlayList o = read(playListid);
+			Mp3 m = mp3sessioncntroller.read(mp3id);
+			o.getTracks().add(m);
+			return update(o);
+		}
+
+		public PlayList addFollower(long playListId, long userId) {
+			PlayList o = read(playListId);
+			User u = userSessionController.read(userId);
+			o.getPlayListFollowers().add(u);
+			return update(o);
+			
 		}
 
 

@@ -30,29 +30,20 @@ public class PlayListEndpoint {
 		return "1234blabla";
 	}
 	
-	@Path("/{UserId}")
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public void addPlayList (@PathParam("UserId") long userId, PlayList playList){
-		playListSessionController.create(userId, playList);
-	}
-	
-	@Path("/")
-	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public PlayList udatePlayList (PlayList playList){
-		return playListSessionController.update(playList);
-		
-	}
-	
 	@Path("/{id}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public PlayList getPlayList (@PathParam("id") long id){
 		PlayList playList= playListSessionController.read(id);
 		return playList;
+	}
+	
+	@Path("/{id}/creator")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getCreator (@PathParam("id") long id){
+		User creator = playListSessionController.getCreator(id);
+		return creator;
 	}
 	
 	@Path("/{id}/mp3s")
@@ -71,13 +62,42 @@ public class PlayListEndpoint {
 		return Double.toString(voteResult);
 	}
 	
-	@Path("/{id}/creator")
-	@GET
+	@Path("/{UserId}")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public User getCreator (@PathParam("id") long id){
-		User creator = playListSessionController.getCreator(id);
-		return creator;
+	public void addPlayList (@PathParam("UserId") long userId, PlayList playList){
+		playListSessionController.create(userId, playList);
 	}
+	
+	@Path("/{id}/follower/{userId}")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public PlayList addFollower (@PathParam("userId") long userId, @PathParam("id") long playListId){
+		return playListSessionController.addFollower(playListId, userId);
+	}
+	
+	@Path("/{id}/mp3/{Mp3id}")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public PlayList addMp3 (@PathParam("id") long playListid, @PathParam("Mp3id") long Mp3id){
+		return playListSessionController.addMp3(playListid, Mp3id);
+		
+	}
+	
+	
+	@Path("/")
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public PlayList udatePlayList (PlayList playList){
+		return playListSessionController.update(playList);
+		
+	}
+	
+
 	
 	@Path("/{id}")
 	@DELETE

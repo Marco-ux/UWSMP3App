@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User {
 	
 	@Id
-	//@GeneratedValue( strategy = GenerationType.AUTO)
+	@GeneratedValue( strategy = GenerationType.AUTO)
 	@Column(nullable = false)
  	private long id;
     private String fistName;

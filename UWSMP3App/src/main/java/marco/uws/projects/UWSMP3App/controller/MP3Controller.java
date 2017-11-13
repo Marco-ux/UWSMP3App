@@ -1,6 +1,7 @@
 package marco.uws.projects.UWSMP3App.controller;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -20,6 +21,15 @@ public class MP3Controller {
 		session.saveOrUpdate(o);
 		session.beginTransaction().commit();
 		session.close();
+	}
+    
+    public static long saveObjectReturnsID(Object o){
+		SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionfactory.openSession();
+		Serializable ser = session.save(o);
+		session.beginTransaction().commit();
+		session.close();
+		return (long) ser;
 	}
     
     /**

@@ -8,24 +8,25 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import marco.uws.projects.UWSMP3App.controller.UserSessionController;
 import marco.uws.projects.UWSMP3App.model.User;
 
 @Path("/registration")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
 public class RegistrationEndpoint {
+	
+	UserSessionController userSessionController = new UserSessionController();
 	
 	@Path ("/user")
 	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response insertUser(@HeaderParam("authorization") String registrationparams){
+	public User insertUser(@HeaderParam("authorization") String registrationparams){
 		String[] creds = registrationparams.split("&");
-		String username = creds[0];
-		String usernameDoc = creds[1];
+		String firstName = creds[0];
+		String secondName = creds[1];
 		String password = creds[2];
-		//User u = //registrationservice.insertPatient(usernamePat, usernameDoc, password);
-		
-		return null;
+		User u = userSessionController.create(firstName, secondName, password);
+		return u;
 	}
 
 }
