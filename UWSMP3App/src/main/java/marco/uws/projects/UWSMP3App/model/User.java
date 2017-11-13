@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 @Entity
@@ -55,7 +56,7 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
+	@XmlTransient
 	public String getPassword() {
 		return password;
 	}
@@ -64,7 +65,7 @@ public class User {
 		this.password = password;
 	}
 
-	
+	@XmlTransient
 	public Set<PlayList> getPlayListsFollowed() {
 		return playListsFollowed;
 	}
