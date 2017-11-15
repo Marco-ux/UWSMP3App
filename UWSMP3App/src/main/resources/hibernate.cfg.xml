@@ -27,8 +27,6 @@
     <mapping class="marco.uws.projects.UWSMP3App.model.PlayList" />
     <mapping class="marco.uws.projects.UWSMP3App.model.User" />
     <mapping class="marco.uws.projects.UWSMP3App.model.Vote" />
-    <mapping class="marco.uws.projects.UWSMP3App.model.Medicine" />
-    <mapping class="marco.uws.projects.UWSMP3App.model.PatientCase" />
      
   </session-factory>
 </hibernate-configuration>

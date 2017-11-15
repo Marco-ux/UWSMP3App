@@ -22,7 +22,11 @@ public class MP3Controller {
 		session.beginTransaction().commit();
 		session.close();
 	}
-    
+    /**
+	 * Saves the given Object in its entity-table, if such a Table has been introduced to Hibernate in the hibernate.cfg.xml
+	 * @param o Is the Object that should be added to the database
+	 * @return The ID of the now persisted object
+	 */
     public static long saveObjectReturnsID(Object o){
 		SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionfactory.openSession();

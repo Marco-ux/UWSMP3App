@@ -6,6 +6,7 @@ import java.util.TreeSet;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -15,9 +16,7 @@ import javax.ws.rs.core.MediaType;
 
 import marco.uws.projects.UWSMP3App.controller.MP3Controller;
 import marco.uws.projects.UWSMP3App.controller.MP3SessionController;
-import marco.uws.projects.UWSMP3App.model.Medicine;
 import marco.uws.projects.UWSMP3App.model.Mp3;
-import marco.uws.projects.UWSMP3App.model.PatientCase;
 import marco.uws.projects.UWSMP3App.model.PlayList;
 import marco.uws.projects.UWSMP3App.model.User;
 import marco.uws.projects.UWSMP3App.model.Vote;
@@ -38,16 +37,16 @@ public class MP3Endpoint {
 	@Path("/{id}/individualRank")
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
-	public String getIndividualRank (@PathParam("id") long id){
-		int rank = mp3controller.getIndividualRank(id);
+	public String getIndividualRank (@HeaderParam("authorization") String token, @PathParam("id") long id){
+		int rank = mp3controller.getIndividualRank(id, token);
 		return Integer.toString(rank);
 	}
 	
 	@Path("/charts")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public TreeSet<Mp3> getCharts (){
-		TreeSet<Mp3> tracks = mp3controller.getCharts();
+	public TreeSet<Mp3> getCharts (@HeaderParam("authorization") String token){
+		TreeSet<Mp3> tracks = mp3controller.getCharts(token);
 		return tracks;
 	}
 	
@@ -55,15 +54,15 @@ public class MP3Endpoint {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void addMp3 (Mp3 mp3){
-		mp3controller.createMP3(mp3);
+	public void addMp3 (@HeaderParam("authorization") String token, Mp3 mp3){
+		mp3controller.createMP3(mp3, token);
 	}
 	
 	@Path("/{id}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Mp3 getMP3(@PathParam("id") long id){
-		Mp3 b= mp3controller.read(id);
+	public Mp3 getMP3(@HeaderParam("authorization") String token, @PathParam("id") long id){
+		Mp3 b= mp3controller.read(id, token);
 		return b ;
 	}
 	
@@ -72,16 +71,16 @@ public class MP3Endpoint {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Mp3 udateMp3 (Mp3 mp3){
-		return mp3controller.update(mp3);
+	public Mp3 udateMp3 (@HeaderParam("authorization") String token, Mp3 mp3){
+		return mp3controller.update(mp3,token);
 		
 	}
 	
 	@Path("/{id}")
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void deleteMp3 (@PathParam("id") long id){
-		mp3controller.delete(id);
+	public void deleteMp3 (@HeaderParam("authorization") String token, @PathParam("id") long id){
+		mp3controller.delete(id, token);
 	}
 	
 	/**
